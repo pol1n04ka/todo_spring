@@ -2,7 +2,8 @@
 
 .container {
     width: 100%;
-    @media (width >= 20rem /* fix for iphone 16 pro screen and smaller */) {
+    margin-bottom: 4em;
+    @media (width >= 20rem /* for iphone 16 pro screen and smaller */) {
         max-width: 90%;
     }
     @media (width >= 40rem /* 640px */) {
