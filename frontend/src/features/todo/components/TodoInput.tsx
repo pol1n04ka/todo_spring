@@ -2,17 +2,19 @@ import Input from "../../../shared/components/Input.tsx";
 import Button, {ButtonType} from "../../../shared/components/Button.tsx";
 import {useState} from "react";
 import * as React from "react";
-// import type {TodoCreateDTO} from "../types/todo.ts";
 
-export default function TodoInput() {
+interface TodoInputProps {
+    addTodo: (title: string) => {}
+}
+
+export default function TodoInput({ addTodo }: TodoInputProps) {
 
     const [ title, setTitle ] = useState('')
 
-    const handleSubmit = (e: React.FormEvent)=> {
+    const handleSubmit = async (e: React.FormEvent)=> {
         e.preventDefault()
-        console.log(title)
-
-        // Todo: add code for submitting todo
+        addTodo(title)
+        setTitle('')
     }
 
     return(

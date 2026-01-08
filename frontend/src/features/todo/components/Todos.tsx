@@ -1,9 +1,16 @@
-import useTodos from "../hooks/useTodos.ts";
 import {TodoItem} from "./TodoItem.tsx";
+import type Todo from "../types/todo.ts";
 
-export default function Todos() {
+interface TodosProps {
+    todos: Todo[],
+    error: boolean,
+    loading: boolean,
+    deleteTodo: (id: number) => {}
+}
 
-    const { todos, loading } = useTodos()
+export default function Todos({ todos, error, loading, deleteTodo }: TodosProps) {
+
+    if (error) return <div>Something gone south (error)</div>
 
     if (loading) return <div>Loading</div>
 
@@ -14,7 +21,9 @@ export default function Todos() {
                 return <TodoItem
                     key={todo.id}
                     title={todo.title}
-                    body={todo.body}
+                    body={todo.body || ""}
+                    id={todo.id}
+                    deleteTodo={ deleteTodo }
                 />
             })}
         </>

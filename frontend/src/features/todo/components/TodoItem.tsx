@@ -1,12 +1,20 @@
 import Checkbox from "../../../shared/components/Checkbox.tsx";
 import Button, {ButtonType} from "../../../shared/components/Button.tsx";
+import type {MouseEventHandler} from "react";
 
 type TodoItemProps = {
     title: string,
-    body: string
+    body: string,
+    id: number,
+    deleteTodo: (id: number) => {}
 }
 
-export function TodoItem({ title, body }: TodoItemProps) {
+export function TodoItem({ title, body, id, deleteTodo }: TodoItemProps) {
+
+    const handleDelete: MouseEventHandler<HTMLButtonElement> = () => {
+        deleteTodo(id)
+    }
+
     return(
         <div className="flex w-full justify-between space-x-3 items-center my-3">
             <Checkbox />
@@ -22,7 +30,7 @@ export function TodoItem({ title, body }: TodoItemProps) {
                 <Button
                     type={ ButtonType.edit }
                     label="delete"
-                    onClick={ () => console.log("Delete button clicked!") }/>
+                    onClick={ handleDelete }/>
             </div>
         </div>
     )
